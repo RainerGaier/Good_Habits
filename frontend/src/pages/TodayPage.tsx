@@ -6,6 +6,7 @@ import HabitForm from '@/components/HabitForm'
 import Modal from '@/components/Modal'
 import Button from '@/components/Button'
 import EmptyState from '@/components/EmptyState'
+import CalendarPage from '@/pages/CalendarPage'
 
 function TodayPage() {
   const {
@@ -22,6 +23,7 @@ function TodayPage() {
   const [editingHabit, setEditingHabit] = useState<HabitWithStats | null>(null)
   const [deletingHabit, setDeletingHabit] = useState<HabitWithStats | null>(null)
   const [actionLoading, setActionLoading] = useState<string | null>(null)
+  const [viewingCalendar, setViewingCalendar] = useState<HabitWithStats | null>(null)
 
   const today = new Date()
   const formattedDate = today.toLocaleDateString('en-US', {
@@ -65,6 +67,16 @@ function TodayPage() {
     } finally {
       setActionLoading(null)
     }
+  }
+
+  if (viewingCalendar) {
+    return (
+      <CalendarPage
+        habitId={viewingCalendar.id}
+        habitName={viewingCalendar.name}
+        onBack={() => setViewingCalendar(null)}
+      />
+    )
   }
 
   if (loading) {
@@ -141,6 +153,7 @@ function TodayPage() {
                   onToggle={() => handleToggle(habit)}
                   onEdit={() => setEditingHabit(habit)}
                   onDelete={() => setDeletingHabit(habit)}
+                  onCalendar={() => setViewingCalendar(habit)}
                   isLoading={actionLoading === habit.id}
                 />
               ))}

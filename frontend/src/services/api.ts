@@ -8,6 +8,10 @@ import type {
   HabitUpdate,
   HabitResponse,
   CompletionResponse,
+  CompletionsListResponse,
+  AbsencesListResponse,
+  AbsenceCreate,
+  AbsenceResponse,
 } from '@/types/habit'
 
 const API_BASE = '/api'
@@ -77,5 +81,31 @@ export const api = {
 
     uncomplete: (id: string, date: string) =>
       api.delete<void>(`/habits/${id}/completions/${date}`),
+  },
+
+  completions: {
+    list: (habitId: string, startDate?: string, endDate?: string) => {
+      let url = `/habits/${habitId}/completions`
+      if (startDate && endDate) {
+        url += `?start_date=${startDate}&end_date=${endDate}`
+      }
+      return api.get<CompletionsListResponse>(url)
+    },
+  },
+
+  absences: {
+    list: (habitId: string, startDate?: string, endDate?: string) => {
+      let url = `/habits/${habitId}/absences`
+      if (startDate && endDate) {
+        url += `?start_date=${startDate}&end_date=${endDate}`
+      }
+      return api.get<AbsencesListResponse>(url)
+    },
+
+    create: (habitId: string, data?: AbsenceCreate) =>
+      api.post<AbsenceResponse>(`/habits/${habitId}/absences`, data || {}),
+
+    delete: (habitId: string, date: string) =>
+      api.delete<void>(`/habits/${habitId}/absences/${date}`),
   },
 }

@@ -50,3 +50,34 @@ export interface CompletionResponse {
   date: string // YYYY-MM-DD format
   completed: boolean
 }
+
+// Absence item in list response
+export interface AbsenceItem {
+  date: string // YYYY-MM-DD format
+  reason: string | null
+}
+
+// Absences list response
+export interface AbsencesListResponse {
+  habit_id: string
+  absences: AbsenceItem[]
+}
+
+// Completions list response
+export interface CompletionsListResponse {
+  habit_id: string
+  completions: string[] // Array of YYYY-MM-DD dates
+}
+
+// Absence create request
+export interface AbsenceCreate {
+  date?: string // YYYY-MM-DD, defaults to today
+  reason?: string | null
+}
+
+// Absence response
+export interface AbsenceResponse {
+  habit_id: string
+  date: string
+  reason: string | null
+}

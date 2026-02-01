@@ -8,6 +8,7 @@ interface HabitCardProps {
   onToggle: () => void
   onEdit: () => void
   onDelete: () => void
+  onCalendar: () => void
   isLoading?: boolean
 }
 
@@ -16,6 +17,7 @@ function HabitCard({
   onToggle,
   onEdit,
   onDelete,
+  onCalendar,
   isLoading = false,
 }: HabitCardProps) {
   return (
@@ -58,6 +60,25 @@ function HabitCard({
 
             {/* Actions Menu */}
             <div className="flex-shrink-0 flex items-center gap-1">
+              <button
+                onClick={onCalendar}
+                className="p-1.5 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded transition-colors"
+                aria-label="View calendar"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+              </button>
               <button
                 onClick={onEdit}
                 className="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded transition-colors"
