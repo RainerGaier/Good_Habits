@@ -135,4 +135,4 @@ cd frontend && npm test
 
 ## License
 
-[Add your license here]
+MIT
